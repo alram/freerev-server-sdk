@@ -7,7 +7,7 @@ var tokenTable = [];
 
 // Private function to store token
 var _storeToken = function (token, cookie) {
-        
+
   tokenTable.push({
     token: token,
     cookie: cookie
@@ -20,7 +20,7 @@ exports.generateToken = function (cookie, cb) {
   require('crypto').randomBytes(3, function(ex, buf) {
   var token = buf.toString('hex');
     _storeToken(token, cookie);
-    cb(token);
+    cb('', token);
   });
 };
 
@@ -31,14 +31,14 @@ exports.verifyToken = function (token, cb) {
   }
   var i = 0;
   var found = 0;
-        
+
   for (i = 0; i < tokenTable.length; i++) {
     if(tokenTable[i].token === token) {
       found = 1;
       return cb('', tokenTable[i].cookie);
     }
   }
-        
+
   if(found === 0)
     return cb(returnError.invalidToken);
 };
