@@ -7,24 +7,16 @@ var token = require('./token.js');
 var returnError = require('./error');
 
 var freerevAPI = function () {
-                
+
   // BEGIN OF .connect()
-  function connect(headers, cb) {
-                
-  if (!headers.authorization) {
+  function connect(auth, cb) {
+
+  if (!auth.login  || !auth.passwd) {
     return cb(returnError.emptyAuth);
   }
 
-  //Get the base64 login/pass
-  var encCredentials = headers.authorization.split(' ')[1];
-  var clearCredentials = new Buffer(encCredentials, 'base64').toString();
-  var credentials = {
-    login: clearCredentials.split(':')[0],
-    passwd: clearCredentials.split(':')[1]
-  };
-        
-  var data = querystring.stringify(credentials);
-                
+  var data = querystring.stringify(auth);
+
   var options = {
     host: config.host,
     port: config.port,
@@ -48,9 +40,9 @@ var freerevAPI = function () {
 
   req.write(data);
   req.end();
-}; 
+};
 // END OF .CONNECT
-        
+
   return {
     connect: connect,
     getStatus: conn.getStatus,
@@ -67,7 +59,7 @@ var freerevAPI = function () {
     generateToken: token.generateToken,
     verifyToken: token.verifyToken
   };
-                
+
 };
 
 module.exports = freerevAPI();

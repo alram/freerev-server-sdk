@@ -14,56 +14,55 @@ Errors are formatted as follow:
 
     error: {
       header: {
-        httpCode: xxx        
+        httpCode: xxx
       },
       body: {
-        code: 'httpMessage', 
-        message: 'Error description' 
+        code: 'httpMessage',
+        message: 'Error description'
       }
     }
-  
+
 ##Auth and Token
 
 ### Freebox Auth
 First step is to connect to the freebox. This will return a cookie.
 
     .connect(object, cb);
-**Object**: { authorization: login&password }.  
-_Autorization_ contains a base64 encoded password (HTTP Basic Auth) with the form ' Basic _encodedPassword_ '. ***This is going to change soon***.  
+**Object**: { login: 'freebox', passwd: 'freeboxpassword' }.
 **Callback**: error, cookie
 
 ### Generate Token
 After getting a cookie, you need to generate a token.
 
     .generateToken(cookie, cb);
-**Cookie**: Self explanatory.  
+**Cookie**: Self explanatory.
 **cb**: error, token
 
 ###Verify token validity
 
     .verifyToken(token, cb);
-**token**: Self explanatory.  
+**token**: Self explanatory.
 **cb**: error, cookie
 
 ##Conn
 
 ###Status
-Generic informations about your internet connection.  
+Generic informations about your internet connection.
 
     .getStatus(cookie, cb);
-**cb**: error, data.  
+**cb**: error, data.
 
 ###Ping
 Get remote ping status.
 
     .remotePingStatus(cookie, cb);
-**cb**: error, data { enabled: true/false }.  
+**cb**: error, data { enabled: true/false }.
 
 (De)Activate remote ping.
 
     .changeRemotePing(params, cb);
-**params**:  
-{ cookie:yyy, enabled: true/false }   
+**params**:
+{ cookie:yyy, enabled: true/false }
 **cb**: error, {}
 
 ###Remote HTTP Access
@@ -76,9 +75,9 @@ Get remote access status
 Change remote access
 
     .changeRemoteAccess(params, cb);
-**params**:  
-{ cookie: yyy, enabled: true/false, http_port: XX}  
-*http\_port* is optional when deactivating remote access.  
+**params**:
+{ cookie: yyy, enabled: true/false, http_port: XX}
+*http\_port* is optional when deactivating remote access.
 **cb**: error, {}
 
 ###Wake On Lan
@@ -91,8 +90,8 @@ Get WakeOnLan status
 Change Wake On Lan
 
     .changeWOL(params, cb);
-**params**:  
-{ cookie: yyy, enabled: true/false }  
+**params**:
+{ cookie: yyy, enabled: true/false }
 **cb**: error, {}
 
 ###Logs
@@ -117,8 +116,8 @@ Get DDNS Configuration (NO-IP and DynDNS).
 Change DDNS Configuration
 
     .configureDDNS(params, cb);
-**params**:  
-{ cookie; yyy, enabled: true/false, user: _user_, password: _password_, hostname: _hostname_, service: dyndns/noip }  
+**params**:
+{ cookie; yyy, enabled: true/false, user: _user_, password: _password_, hostname: _hostname_, service: dyndns/noip }
 _user, password, hostname, service_ are optional when deactivating DDNS.
 
 ##Example
@@ -127,10 +126,10 @@ You can check the [Freebox Revolution Server API](https://github.com/alram/freer
 
     var freeSDK = require('freerev-server-sdk');
 
-    var cred = 'freebox:password';
-    /* That sucks */
-    var encCred = new Buffer(cred, 'utf-8').toString('base64');
-    var headers = { authorization: 'Basic ' + encCred };
+    var auth = {
+			login: 'freebox',
+			passwd: 'password'
+		};
 
     function statusList(token) {
     	freeSDK.verifyToken(token, function (error, cookie) {
@@ -142,7 +141,7 @@ You can check the [Freebox Revolution Server API](https://github.com/alram/freer
     	});
     }
 
-    freeSDK.connect(headers, function (error, cookie) {
+    freeSDK.connect(auth, function (error, cookie) {
     	if (error) throw error;
     	freeSDK.generateToken(cookie, function (error, token) {
     		if (error) throw error;

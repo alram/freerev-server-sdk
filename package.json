@@ -2,7 +2,7 @@
   "author": "Alexandre Marangone <a.marangone@gmail.com>",
   "name": "freerev-server-sdk",
   "description": "Freebox Revolution Server nodejs SDK",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/alram/freerev-server-sdk.git"
