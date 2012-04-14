@@ -9,7 +9,7 @@ exports.enabledMissing = {
     httpCode: 400
   },
   body: {
-    code:'BadRequest', 
+    code:'BadRequest',
     message: 'enabled=true/false is mandatory'
   }
 };
@@ -19,7 +19,7 @@ exports.enabledWrongValue = {
     httpCode: 400
   },
   body: {
-    code:'BadRequest', 
+    code:'BadRequest',
     message: 'enabled can only take true or false as value'
   }
 };
@@ -27,30 +27,30 @@ exports.enabledWrongValue = {
 exports.ddnsServiceMising = {
   header: {
     httpCode: 400
-  },      
+  },
   body: {
-    code:'BadRequest', 
+    code:'BadRequest',
     message: 'You must specify the service you want to configure (dyndns or noip)'
   }
 };
 
-exports.httpPortMissing = { 
+exports.httpPortMissing = {
   header: {
     httpCode: 400
   },
   body: {
-    code: 'BadRequest', 
-    message: 'http_port must be specified' 
+    code: 'BadRequest',
+    message: 'http_port must be specified'
   }
 };
 
-exports.wrongAuth = { 
+exports.wrongAuth = {
   header: {
     httpCode: 401
   },
   body: {
-    code: 'Unauthorized', 
-    message: 'Incorrect login/password' 
+    code: 'Unauthorized',
+    message: 'Incorrect login/password'
   }
 };
 
@@ -59,8 +59,8 @@ exports.emptyAuth = {
     httpCode: 401
   },
   body: {
-    code: 'Unauthorized', 
-    message: 'You must specify a login and password' 
+    code: 'Unauthorized',
+    message: 'You must specify a login and password'
   }
 };
 
@@ -69,8 +69,18 @@ exports.invalidToken = {
     httpCode: 401
   },
   body: {
-    code: 'Unauthorized', 
-    message: 'Token is either invalid or has expired' 
+    code: 'Unauthorized',
+    message: 'Token is either invalid or has expired'
+  }
+};
+
+exports.invalidCookie = {
+  header: {
+    httpCode: 401
+  },
+  body: {
+    code: 'Unauthoried',
+    message: 'Cookie seems to have expired, reconnect.'
   }
 };
 
@@ -80,16 +90,16 @@ exports.missingToken = {
   },
   body: {
     code: 'Unauthorized',
-    message: 'You must specify a token. If you do not have one. Use GET /token'
+    message: 'You must specify a token.'
   }
 };
 
 exports.internalServerError = {
   header: {
     httpCode: 500
-  },      
+  },
   body: {
     code: 'InternalServerError',
-    message: 'Unknown Server Error. Most probably Free changed something in its API'
+    message: 'Unknown Server Error.'
   }
 };

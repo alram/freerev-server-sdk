@@ -16,7 +16,7 @@ var _storeToken = function (token, cookie) {
 
 // Generate a 5 char randmo token
 // TODO: Check if token hasn't been already attributed
-exports.generateToken = function (cookie, cb) {
+exports._generateToken = function (cookie, cb) {
   require('crypto').randomBytes(3, function(ex, buf) {
   var token = buf.toString('hex');
     _storeToken(token, cookie);
@@ -24,8 +24,8 @@ exports.generateToken = function (cookie, cb) {
   });
 };
 
-// function to verify token validity
-exports.verifyToken = function (token, cb) {
+// Private function to verify token validity
+exports._verifyToken = function (token, cb) {
   if(!token) {
     return cb(returnError.missingToken);
   }

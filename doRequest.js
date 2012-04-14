@@ -3,7 +3,7 @@ var http = require('http');
 var returnError = require('./error');
 
 exports._doRequest = function (options, data, cb) {
-        
+
   var req = http.request(options, function (res) {
     if (res.statusCode === 200) {
       res.setEncoding('utf8');
@@ -13,11 +13,11 @@ exports._doRequest = function (options, data, cb) {
     }
     //Cookie has expired or is not valid
     else {
-      return cb({code: 401, message: 'Unauthorized: cookie has exp or invalid'});
+      return cb(returnError.invalidCookie);
     }
   });
-        
+
   req.write(data);
-  req.end();      
+  req.end();
 };
 //end of _doRequest
