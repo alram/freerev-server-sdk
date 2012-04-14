@@ -38,7 +38,30 @@ var ddns = function () {
             return cb(returnError.internalServerError);
           }
           else {
-            return cb('', d.result);
+            var dyndns = {};
+            var noip = {};
+            d.result.forEach(function (r) {
+              if (r.name === 'dyndns') {
+                dyndns = {
+                  enabled: r.cfg.enabled,
+                  hostname: r.cfg.hostname,
+                  user: r.cfg.user,
+                  password: r.cfg.password,
+                  status: r.status
+                };
+              }
+              if (r.name === 'noip') {
+                noip = {
+                  enabled: r.cfg.enabled,
+                  hostname: r.cfg.hostname,
+                  user: r.cfg.user,
+                  password: r.cfg.password,
+                  status: r.status
+                };
+              }
+
+            });
+            return cb('', { dyndns: dyndns, noip: noip });
           }
         });
       }
