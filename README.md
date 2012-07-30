@@ -1,3 +1,5 @@
+#Discontinued
+I don't have Free anymore. Code needs a bit of refactoring but is usable as a basis.
 
 #Freebox Revolution Server SDK - Documentation
 
