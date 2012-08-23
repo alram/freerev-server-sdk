@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/alram/freerev-server-sdk.png)](http://travis-ci.org/alram/freerev-server-sdk)
 #Discontinued
 I don't have Free anymore. Code needs a bit of refactoring but is usable as a basis.
 
